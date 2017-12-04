@@ -9,6 +9,7 @@ import com.soapsoft.dao.TbProduccionDaoImpl;
 import com.soapsoft.model.TbProduccion;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -27,8 +28,8 @@ public class SVR_PRODUCCION {
     /**
      * Web service operation
      */
-    @WebMethod(operationName = "fn_insertar")
-    public String fn_insertar(@WebParam(name = "id_dpto_produccion") String id_dpto_produccion, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "observacion") String observacion) {
+    @WebMethod(operationName = "fn_insertar_pr")
+    public String fn_insertar_pr(@WebParam(name = "id_dpto_produccion") String id_dpto_produccion, @WebParam(name = "creadoPor") String creadoPor, @WebParam(name = "observacion") String observacion) {
         //TODO write your implementation code here:
         TbProduccion obj=new TbProduccion(id_dpto_produccion, creadoPor, Date.valueOf(LocalDate.now()), observacion);
         
@@ -39,6 +40,17 @@ public class SVR_PRODUCCION {
         } catch (Exception e) {
             throw e;
         }
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "fn_consultar_pr")
+    public List<TbProduccion> fn_consultar_pr() {
+            TbProduccionDaoImpl dao = new TbProduccionDaoImpl();
+
+           return dao.fn_consultar_nit_produccion();
+      
     }
     
     
